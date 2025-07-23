@@ -1,0 +1,291 @@
+
+------------------------------------------- TITLE
+------- Numa interleave testing ---------- TITLE
+------------------------------------------- TITLE
+------------------------------------------- TITLE
+1 thread --interleave=0  TITLE
+ Once upon a time, there was a kingdom which had a very evil king. październik 1, 2020.
+Once upon a time there was a kingdom which had a very evil king. He was called the king of the world, and he had a beautiful daughter, who was called Princess Violetta. She was as fair as any princess could be.
+But she was very proud and vain, and[1728475361] Cmd: ./main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p "Once upon a time, there was a kingdom" -t 1 --log-enable
+[1728475361] main: built with clang version 19.0.0git (https://github.com/llvm/llvm-project.git ecb34599bdadfb74ee22529ad150e7500dd22641) for riscv64-unknown-linux-gnu
+[1728475371] system_info: n_threads = 1 / 64 | AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 0 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+[1728475569] llama_print_timings:        load time = 10176.1790 ms
+[1728475569] llama_print_timings:      sample time =     7.7420 ms /    80 runs   (  0.0968 ms per token, 10333.2472 tokens per second)
+[1728475569] llama_print_timings: prompt eval time = 17864.1360 ms /    10 tokens (1786.4136 ms per token,   0.5598 tokens per second)
+[1728475569] llama_print_timings:        eval time = 179980.7990 ms /    79 runs   (2278.2380 ms per token,   0.4389 tokens per second)
+[1728475569] llama_print_timings:       total time = 197895.6970 ms /    89 tokens
+# started on Wed Oct  9 08:02:41 2024
+
+
+ Performance counter stats for './main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p Once upon a time, there was a kingdom -t 1 --log-enable':
+
+        209,307.71 msec task-clock                       #    0.999 CPUs utilized             
+             1,250      context-switches                 #    5.972 /sec                      
+                10      cpu-migrations                   #    0.048 /sec                      
+            70,540      page-faults                      #  337.016 /sec                      
+   416,552,201,140      cycles                           #    1.990 GHz                         (14.28%)
+   560,680,654,254      instructions                     #    1.35  insn per cycle              (21.42%)
+    11,238,800,958      branches                         #   53.695 M/sec                       (28.57%)
+       251,552,692      branch-misses                    #    2.24% of all branches             (35.72%)
+   129,962,420,413      L1-dcache-loads                  #  620.916 M/sec                       (42.86%)
+     1,051,433,062      L1-dcache-load-misses            #    0.81% of all L1-dcache accesses   (50.00%)
+    15,547,263,185      LLC-loads                        #   74.279 M/sec                       (57.14%)
+     5,633,741,258      LLC-load-misses                  #   36.24% of all LL-cache accesses    (64.28%)
+   176,846,192,189      L1-icache-loads                  #  844.910 M/sec                       (71.43%)
+        54,100,928      L1-icache-load-misses            #    0.03% of all L1-icache accesses   (78.57%)
+     <not counted>      dTLB-loads                                                              (0.00%)
+     1,036,240,413      dTLB-load-misses                 #    0.00% of all dTLB cache accesses  (7.14%)
+     <not counted>      iTLB-loads                                                              (0.00%)
+         2,943,996      iTLB-load-misses                 #    0.00% of all iTLB cache accesses  (7.14%)
+
+     209.515772962 seconds time elapsed
+
+     199.099876000 seconds user
+       6.519591000 seconds sys
+
+
+------------------------------------------- TITLE
+2 thread --interleave=0  TITLE
+ Once upon a time, there was a kingdom that was ruled by a king and queen. Einzelnes muss man immer in Bezug zur Summe stellen, und zwar, dass sie der Summe immer untergeordnet bleibt. The king and queen had a son. The boy was named Prince Charming and he was a very handsome young man. When Prince Charming was born, he was given a name that was not only[1728475572] Cmd: ./main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p "Once upon a time, there was a kingdom" -t 2 --log-enable
+[1728475572] main: built with clang version 19.0.0git (https://github.com/llvm/llvm-project.git ecb34599bdadfb74ee22529ad150e7500dd22641) for riscv64-unknown-linux-gnu
+[1728475581] system_info: n_threads = 2 / 64 | AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 0 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+[1728475690] llama_print_timings:        load time =  8260.0160 ms
+[1728475690] llama_print_timings:      sample time =     7.9090 ms /    80 runs   (  0.0989 ms per token, 10115.0588 tokens per second)
+[1728475690] llama_print_timings: prompt eval time =  9671.5450 ms /    10 tokens (967.1545 ms per token,   1.0340 tokens per second)
+[1728475690] llama_print_timings:        eval time = 99543.1020 ms /    79 runs   (1260.0393 ms per token,   0.7936 tokens per second)
+[1728475690] llama_print_timings:       total time = 109282.1610 ms /    89 tokens
+# started on Wed Oct  9 08:06:12 2024
+
+
+ Performance counter stats for './main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p Once upon a time, there was a kingdom -t 2 --log-enable':
+
+        229,930.62 msec task-clock                       #    1.932 CPUs utilized             
+               932      context-switches                 #    4.053 /sec                      
+                11      cpu-migrations                   #    0.048 /sec                      
+            70,712      page-faults                      #  307.536 /sec                      
+   448,973,310,070      cycles                           #    1.953 GHz                         (14.54%)
+   554,131,037,202      instructions                     #    1.23  insn per cycle              (21.75%)
+    11,262,855,288      branches                         #   48.984 M/sec                       (28.93%)
+       249,909,182      branch-misses                    #    2.22% of all branches             (36.08%)
+   129,359,280,485      L1-dcache-loads                  #  562.601 M/sec                       (43.21%)
+     1,201,645,113      L1-dcache-load-misses            #    0.93% of all L1-dcache accesses   (50.33%)
+    17,685,658,921      LLC-loads                        #   76.917 M/sec                       (57.42%)
+     7,413,248,026      LLC-load-misses                  #   41.92% of all LL-cache accesses    (64.51%)
+   180,330,124,638      L1-icache-loads                  #  784.281 M/sec                       (71.60%)
+        56,846,966      L1-icache-load-misses            #    0.03% of all L1-icache accesses   (78.69%)
+     <not counted>      dTLB-loads                                                              (0.00%)
+       965,670,742      dTLB-load-misses                 #    0.00% of all dTLB cache accesses  (7.28%)
+     <not counted>      iTLB-loads                                                              (0.00%)
+         2,966,996      iTLB-load-misses                 #    0.00% of all iTLB cache accesses  (7.29%)
+
+     119.011008743 seconds time elapsed
+
+     218.491459000 seconds user
+       7.250785000 seconds sys
+
+
+------------------------------------------- TITLE
+4 thread --interleave=0  TITLE
+ Once upon a time, there was a kingdom called Elphine, a place of beauty and wonder. савезни графити за брз развој There lived a king and queen who had only one daughter. One day, the queen became ill and died, leaving the king to care for the princess. The king decided to marry again, but he wanted a woman who was kinder, more generous, and more lov[1728475693] Cmd: ./main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p "Once upon a time, there was a kingdom" -t 4 --log-enable
+[1728475693] main: built with clang version 19.0.0git (https://github.com/llvm/llvm-project.git ecb34599bdadfb74ee22529ad150e7500dd22641) for riscv64-unknown-linux-gnu
+[1728475701] system_info: n_threads = 4 / 64 | AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 0 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+[1728475762] llama_print_timings:        load time =  7399.2770 ms
+[1728475762] llama_print_timings:      sample time =     8.2040 ms /    80 runs   (  0.1026 ms per token, 9751.3408 tokens per second)
+[1728475762] llama_print_timings: prompt eval time =  5392.7330 ms /    10 tokens (539.2733 ms per token,   1.8543 tokens per second)
+[1728475762] llama_print_timings:        eval time = 55309.6400 ms /    79 runs   (700.1220 ms per token,   1.4283 tokens per second)
+[1728475762] llama_print_timings:       total time = 60768.0250 ms /    89 tokens
+# started on Wed Oct  9 08:08:13 2024
+
+
+ Performance counter stats for './main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p Once upon a time, there was a kingdom -t 4 --log-enable':
+
+        254,263.02 msec task-clock                       #    3.651 CPUs utilized             
+               852      context-switches                 #    3.351 /sec                      
+                39      cpu-migrations                   #    0.153 /sec                      
+            70,908      page-faults                      #  278.877 /sec                      
+   478,425,432,917      cycles                           #    1.882 GHz                         (15.09%)
+   545,525,557,350      instructions                     #    1.14  insn per cycle              (22.46%)
+    11,765,419,328      branches                         #   46.273 M/sec                       (29.70%)
+       260,715,310      branch-misses                    #    2.22% of all branches             (36.82%)
+   130,563,683,251      L1-dcache-loads                  #  513.499 M/sec                       (43.86%)
+     1,096,922,042      L1-dcache-load-misses            #    0.84% of all L1-dcache accesses   (50.86%)
+    17,351,494,022      LLC-loads                        #   68.242 M/sec                       (57.82%)
+     7,494,804,628      LLC-load-misses                  #   43.19% of all LL-cache accesses    (64.77%)
+   204,453,482,963      L1-icache-loads                  #  804.102 M/sec                       (71.72%)
+        66,091,958      L1-icache-load-misses            #    0.03% of all L1-icache accesses   (78.72%)
+     <not counted>      dTLB-loads                                                              (0.00%)
+       948,553,567      dTLB-load-misses                 #    0.00% of all dTLB cache accesses  (7.67%)
+     <not counted>      iTLB-loads                                                              (0.00%)
+         3,328,864      iTLB-load-misses                 #    0.00% of all iTLB cache accesses  (7.61%)
+
+      69.640549109 seconds time elapsed
+
+     241.100820000 seconds user
+       8.511046000 seconds sys
+
+
+------------------------------------------- TITLE
+8 thread --interleave=0,1  TITLE
+ Once upon a time, there was a kingdom.ϊ This kingdom had two distinctive features. First, the kingdom had a wizard, who was a good wizard, and secondly, the kingdom had a king who was wise and benevolent. The kingdom had a large number of subjects who were intelligent and diligent. The king made good decisions, but sometimes, he would make mistakes. The wizard made the right[1728475765] Cmd: ./main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p "Once upon a time, there was a kingdom" -t 8 --log-enable
+[1728475765] main: built with clang version 19.0.0git (https://github.com/llvm/llvm-project.git ecb34599bdadfb74ee22529ad150e7500dd22641) for riscv64-unknown-linux-gnu
+[1728475772] system_info: n_threads = 8 / 64 | AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 0 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+[1728475804] llama_print_timings:        load time =  7296.1150 ms
+[1728475804] llama_print_timings:      sample time =     8.1170 ms /    80 runs   (  0.1015 ms per token, 9855.8581 tokens per second)
+[1728475804] llama_print_timings: prompt eval time =  2680.7260 ms /    10 tokens (268.0726 ms per token,   3.7303 tokens per second)
+[1728475804] llama_print_timings:        eval time = 29024.9590 ms /    79 runs   (367.4045 ms per token,   2.7218 tokens per second)
+[1728475804] llama_print_timings:       total time = 31775.4930 ms /    89 tokens
+# started on Wed Oct  9 08:09:25 2024
+
+
+ Performance counter stats for './main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p Once upon a time, there was a kingdom -t 8 --log-enable':
+
+        264,143.16 msec task-clock                       #    6.476 CPUs utilized             
+             1,096      context-switches                 #    4.149 /sec                      
+                90      cpu-migrations                   #    0.341 /sec                      
+            71,760      page-faults                      #  271.671 /sec                      
+   467,835,721,112      cycles                           #    1.771 GHz                         (16.00%)
+   516,698,647,813      instructions                     #    1.10  insn per cycle              (23.56%)
+    11,558,997,037      branches                         #   43.760 M/sec                       (30.90%)
+       252,211,071      branch-misses                    #    2.18% of all branches             (38.07%)
+   126,435,724,682      L1-dcache-loads                  #  478.664 M/sec                       (45.11%)
+     1,182,762,003      L1-dcache-load-misses            #    0.94% of all L1-dcache accesses   (51.97%)
+    17,170,966,969      LLC-loads                        #   65.006 M/sec                       (58.77%)
+     7,405,815,810      LLC-load-misses                  #   43.13% of all LL-cache accesses    (65.53%)
+   212,006,468,175      L1-icache-loads                  #  802.620 M/sec                       (72.30%)
+        79,671,355      L1-icache-load-misses            #    0.04% of all L1-icache accesses   (79.05%)
+     <not counted>      dTLB-loads                                                              (0.00%)
+       928,750,175      dTLB-load-misses                 #    0.00% of all dTLB cache accesses  (8.18%)
+     <not counted>      iTLB-loads                                                              (0.00%)
+         3,306,016      iTLB-load-misses                 #    0.00% of all iTLB cache accesses  (8.18%)
+
+      40.787554972 seconds time elapsed
+
+     247.524608000 seconds user
+      11.711655000 seconds sys
+
+
+------------------------------------------- TITLE
+16 thread --interleave=all  TITLE
+ Once upon a time, there was a kingdom ruled by a King. nobody wanted to rule the kingdom because it was not very prosperous. But it was not a very bad kingdom either. The King had one son. The King wanted his son to rule the kingdom, so he had a meeting with all the wise men of the land.
+The wise men came with their ideas. The first wise man said, "Let's make this[1728475808] Cmd: ./main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p "Once upon a time, there was a kingdom" -t 16 --log-enable
+[1728475808] main: built with clang version 19.0.0git (https://github.com/llvm/llvm-project.git ecb34599bdadfb74ee22529ad150e7500dd22641) for riscv64-unknown-linux-gnu
+[1728475817] system_info: n_threads = 16 / 64 | AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 0 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+[1728475835] llama_print_timings:        load time =  8839.8110 ms
+[1728475835] llama_print_timings:      sample time =     8.9530 ms /    80 runs   (  0.1119 ms per token, 8935.5523 tokens per second)
+[1728475835] llama_print_timings: prompt eval time =  1450.6230 ms /    10 tokens (145.0623 ms per token,   6.8936 tokens per second)
+[1728475835] llama_print_timings:        eval time = 17127.4330 ms /    79 runs   (216.8029 ms per token,   4.6125 tokens per second)
+[1728475835] llama_print_timings:       total time = 18647.2460 ms /    89 tokens
+# started on Wed Oct  9 08:10:07 2024
+
+
+ Performance counter stats for './main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p Once upon a time, there was a kingdom -t 16 --log-enable':
+
+        303,172.15 msec task-clock                       #   10.341 CPUs utilized             
+             1,908      context-switches                 #    6.293 /sec                      
+               149      cpu-migrations                   #    0.491 /sec                      
+            73,794      page-faults                      #  243.406 /sec                      
+   470,906,958,381      cycles                           #    1.553 GHz                         (18.37%)
+   486,378,480,741      instructions                     #    1.03  insn per cycle              (26.40%)
+    12,314,158,430      branches                         #   40.618 M/sec                       (33.68%)
+       268,676,424      branch-misses                    #    2.18% of all branches             (40.77%)
+   123,675,750,351      L1-dcache-loads                  #  407.939 M/sec                       (47.63%)
+     1,111,161,904      L1-dcache-load-misses            #    0.90% of all L1-dcache accesses   (54.35%)
+    16,724,620,101      LLC-loads                        #   55.165 M/sec                       (60.82%)
+     7,266,525,074      LLC-load-misses                  #   43.45% of all LL-cache accesses    (67.23%)
+   257,674,589,751      L1-icache-loads                  #  849.928 M/sec                       (73.45%)
+       112,799,487      L1-icache-load-misses            #    0.04% of all L1-icache accesses   (79.74%)
+     <not counted>      dTLB-loads                                                              (0.00%)
+       968,951,232      dTLB-load-misses                 #    0.00% of all dTLB cache accesses  (9.52%)
+     <not counted>      iTLB-loads                                                              (0.00%)
+         3,248,094      iTLB-load-misses                 #    0.00% of all iTLB cache accesses  (9.69%)
+
+      29.317518788 seconds time elapsed
+
+     278.918735000 seconds user
+      18.040772000 seconds sys
+
+
+------------------------------------------- TITLE
+32 thread --interleave=all  TITLE
+ Once upon a time, there was a kingdom ruled by the King and Queen. everybody was happy in the kingdom except the king and queen.
+The King and Queen decided to invite people to join their kingdom.
+There were three brothers who lived on the other side of the forest, who were happy to join the kingdom.
+The King and Queen welcomed them and they were living happily in the kingdom.
+But the brothers[1728475839] Cmd: ./main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p "Once upon a time, there was a kingdom" -t 32 --log-enable
+[1728475839] main: built with clang version 19.0.0git (https://github.com/llvm/llvm-project.git ecb34599bdadfb74ee22529ad150e7500dd22641) for riscv64-unknown-linux-gnu
+[1728475848] system_info: n_threads = 32 / 64 | AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 0 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+[1728475862] llama_print_timings:        load time =  8777.8350 ms
+[1728475862] llama_print_timings:      sample time =     9.0910 ms /    80 runs   (  0.1136 ms per token, 8799.9120 tokens per second)
+[1728475862] llama_print_timings: prompt eval time =   859.6510 ms /    10 tokens ( 85.9651 ms per token,  11.6326 tokens per second)
+[1728475862] llama_print_timings:        eval time = 13315.6500 ms /    79 runs   (168.5525 ms per token,   5.9329 tokens per second)
+[1728475862] llama_print_timings:       total time = 14244.8030 ms /    89 tokens
+# started on Wed Oct  9 08:10:39 2024
+
+
+ Performance counter stats for './main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p Once upon a time, there was a kingdom -t 32 --log-enable':
+
+        434,848.27 msec task-clock                       #   17.490 CPUs utilized             
+             3,354      context-switches                 #    7.713 /sec                      
+               125      cpu-migrations                   #    0.287 /sec                      
+            77,892      page-faults                      #  179.125 /sec                      
+   601,893,400,085      cycles                           #    1.384 GHz                         (20.42%)
+   454,814,257,054      instructions                     #    0.76  insn per cycle              (28.59%)
+    14,023,280,463      branches                         #   32.249 M/sec                       (35.89%)
+       279,912,195      branch-misses                    #    2.00% of all branches             (42.71%)
+   124,729,150,398      L1-dcache-loads                  #  286.834 M/sec                       (49.22%)
+     1,527,371,966      L1-dcache-load-misses            #    1.22% of all L1-dcache accesses   (55.32%)
+    16,789,707,124      LLC-loads                        #   38.610 M/sec                       (61.40%)
+     7,112,365,275      LLC-load-misses                  #   42.36% of all LL-cache accesses    (67.56%)
+   371,016,006,964      L1-icache-loads                  #  853.208 M/sec                       (73.63%)
+       174,246,734      L1-icache-load-misses            #    0.05% of all L1-icache accesses   (79.86%)
+     <not counted>      dTLB-loads                                                              (0.00%)
+       975,868,985      dTLB-load-misses                 #    0.00% of all dTLB cache accesses  (11.35%)
+     <not counted>      iTLB-loads                                                              (0.00%)
+         6,291,750      iTLB-load-misses                 #    0.00% of all iTLB cache accesses  (11.04%)
+
+      24.862770646 seconds time elapsed
+
+     393.161297000 seconds user
+      32.316858000 seconds sys
+
+
+------------------------------------------- TITLE
+64 thread --interleave=all  TITLE
+ Once upon a time, there was a kingdom. насељавам се за првата среща.[1728475866] Cmd: ./main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p "Once upon a time, there was a kingdom" -t 64 --log-enable
+[1728475866] main: built with clang version 19.0.0git (https://github.com/llvm/llvm-project.git ecb34599bdadfb74ee22529ad150e7500dd22641) for riscv64-unknown-linux-gnu
+[1728475875] system_info: n_threads = 64 / 64 | AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 0 | SVE = 0 | ARM_FMA = 0 | F16C = 0 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | 
+[1728475878] llama_print_timings:        load time =  8299.9490 ms
+[1728475878] llama_print_timings:      sample time =     1.6110 ms /    13 runs   (  0.1239 ms per token, 8069.5220 tokens per second)
+[1728475878] llama_print_timings: prompt eval time =   732.2060 ms /    10 tokens ( 73.2206 ms per token,  13.6574 tokens per second)
+[1728475878] llama_print_timings:        eval time =  2068.5440 ms /    12 runs   (172.3787 ms per token,   5.8012 tokens per second)
+[1728475878] llama_print_timings:       total time =  2813.2750 ms /    22 tokens
+# started on Wed Oct  9 08:11:06 2024
+
+
+ Performance counter stats for './main -m /scratch/tools/models/llama-2-7b.Q4_0.gguf -n 80 -p Once upon a time, there was a kingdom -t 64 --log-enable':
+
+        178,166.24 msec task-clock                       #   13.759 CPUs utilized             
+             1,459      context-switches                 #    8.189 /sec                      
+                43      cpu-migrations                   #    0.241 /sec                      
+            84,993      page-faults                      #  477.043 /sec                      
+   265,015,065,521      cycles                           #    1.487 GHz                         (18.59%)
+   127,229,394,915      instructions                     #    0.48  insn per cycle              (26.57%)
+     5,160,411,435      branches                         #   28.964 M/sec                       (34.08%)
+        88,241,276      branch-misses                    #    1.71% of all branches             (41.17%)
+    33,516,019,961      L1-dcache-loads                  #  188.117 M/sec                       (48.04%)
+       503,496,328      L1-dcache-load-misses            #    1.50% of all L1-dcache accesses   (54.50%)
+     3,991,991,576      LLC-loads                        #   22.406 M/sec                       (61.00%)
+     1,666,548,456      LLC-load-misses                  #   41.75% of all LL-cache accesses    (67.49%)
+   132,407,527,209      L1-icache-loads                  #  743.168 M/sec                       (73.74%)
+       109,071,592      L1-icache-load-misses            #    0.08% of all L1-icache accesses   (80.11%)
+     <not counted>      dTLB-loads                                                              (0.00%)
+       375,478,534      dTLB-load-misses                 #    0.00% of all dTLB cache accesses  (10.19%)
+     <not counted>      iTLB-loads                                                              (0.00%)
+         1,851,738      iTLB-load-misses                 #    0.00% of all iTLB cache accesses  (9.83%)
+
+      12.949183840 seconds time elapsed
+
+     148.814455000 seconds user
+      24.298519000 seconds sys
+
+
