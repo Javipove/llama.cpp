@@ -18,6 +18,8 @@
 
 #include "ggml-cpu-aarch64.h"
 
+//////////////// REPLACED __riscv_v_intrinsic with __riscv_v_intrinsic_test to build in scalar ////////////////////
+
 // TODO: move to include file?
 template <int K> constexpr int QK_0() {
     if constexpr (K == 4) {
@@ -899,7 +901,7 @@ static void ggml_gemv_q4_0_8x8_q8_0(int n, float * GGML_RESTRICT s, size_t bs, c
         }
     }
     return;
-#elif defined(__riscv_v_intrinsic)
+#elif defined(__riscv_v_intrinsic_test)
     if (__riscv_vlenb() >= QK4_0) {
         const size_t vl = QK4_0;
 
@@ -3244,7 +3246,7 @@ static void ggml_gemm_q4_0_8x8_q8_0(int n, float * GGML_RESTRICT s, size_t bs, c
         }
         return;
     }
-#elif defined(__riscv_v_intrinsic)
+#elif defined(__riscv_v_intrinsic_test)
     if (__riscv_vlenb() >= QK4_0) {
         const size_t vl = QK4_0;
 

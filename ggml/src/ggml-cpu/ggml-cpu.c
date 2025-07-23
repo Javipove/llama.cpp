@@ -48,6 +48,11 @@
 #include "llamafile/sgemm.h"
 #endif
 
+/* VELORISK STUFF */
+#if defined(GGML_USE_VELORISK) || defined(GGML_USE_QVELORISK)
+#include <velorisk.h>
+#endif
+
 #if defined(_MSC_VER)
 // disable "possible loss of data" to avoid hundreds of casts
 // we should just be careful :)
@@ -7544,7 +7549,76 @@ UseGgmlGemm1:;
     }
 UseGgmlGemm2:;
 #endif
+/////////////// VELORISK CODE REBASE //////////////////
 
+
+#if defined(GGML_USE_VELORISK)
+
+  //Version 1
+    if(src0->type==GGML_TYPE_Q4_0 && vec_dot_type==GGML_TYPE_Q8_0 && ggml_is_contiguous(src0) &&
+        ggml_is_contiguous(src1)
+        //&& ne1==1
+        ) {
+    #if defined(GGMLQUcd ANTS_DEBUG_LOG)
+	printf("\nGGMLQUANTS q4_0 q8_0 %d\n",n);
+	#endif
+    
+
+	const int qk = QK4_0; //size of the blocks in QK4_0 , 32
+    const int qk_8 = QK8_0;
+    const int n_blocks = ne00 / qk; //number of blocks
+    const int n_blocks_q8 = ne10 / qk_8;
+    float * dst_temp = (float*)((char*)dst->data);
+    const void* wdata = (src1->type == vec_dot_type) ? src1->data : params->wdata;
+    const size_t row_size = ggml_row_size(vec_dot_type, ne10);
+    const size_t row_size_y = ggml_row_size(vec_dot_type, ne11);
+    if()
+    //printf("\nGGMLQUANTS q4_0 q8_0 N nb00 %d nb01 %d nb02 %d nb03 %d nb10 %d nb11 %d nb12 %d nb13 %d ne00 %d ne01 %d ne10 %d ne11 %d\n",nb00,nb01,nb02,nb03,nb10,nb11,nb12,nb13,ne00,ne01,ne10,ne11);
+    //printf("WE ARE ITERATING OVER %d outer, %d inner, %d (ne00)\n", ne11, n_blocks,ne00);
+    //if(ith<VARIABLE_VALUE_2){
+    for(int k=0 ; k<ne1 ; k++ ){ //Number of columns output
+        //for(int h=ith*2 ; h<ne0 ; h+=2*nth ) //number of rows and we unroll the matrix 2 times
+        //for(int h=ne0/nth*ith ; h < ne0/nth*(ith+1) ; h+=2 ) //number of rows and we unroll the matrix 2 times
+    //#if defined(_OPENMP)
+    //#pragma omp parallel for num_threads(8) private(x_0,x_1)
+        //for(int h=ne0/8*ith ; h < ne0/8*(ith+1) ; h+=2)
+        //printf()
+    //#else
+        for(int h=ne0/nth*ith ; h < ne0/nth*(ith+1) ; h+=2 ) //number of rows and we unroll the matrix 2 times
+    //#endif
+        { 
+            
+            const block_q8_0 * restrict y = ((const block_q8_0*)wdata) + k * n_blocks_q8;
+
+            const block_q4_0 * restrict x_0 = ((const block_q4_0*)src0->data) + h * n_blocks;
+            const block_q4_0 * restrict x_1 = ((const block_q4_0*)src0->data) + (h+1) * n_blocks;
+#if defined(VELORISK_COMPLEX)
+            kernel_complex(ne01,ne0, x_0,x_1, y,dst_temp, k, h, n_blocks );
+#else
+
+            float sumf_0 = 0.0;
+            float sumf_1 = 0.0;
+
+            for (int i = 0; i < n_blocks; i+=2)   //nb = number of bytes per row
+                kernel( ne01, nb01, (const char*) x_0[i+1].qs, (const char*) x_0[i].qs, (const char*) x_1[i].qs,(const char*) x_1[i+1].qs , 
+                    (const char*) y[i].qs , (const char*) y[i+1].qs , &sumf_0, &sumf_1, x_0[i].d,  x_0[i+1].d, x_1[i].d, x_1[i+1].d, y[i].d, y[i+1].d );
+
+            *(dst_temp+h+k*ne0) = sumf_0;
+            *(dst_temp+(h+1)+k*ne0) = sumf_1;
+#endif
+        }
+
+        }
+    //}
+    
+    return;
+ }
+ 
+
+#endif
+
+
+////////////// END VELORISK CODE REBASE ///////////////
     // This is the size of the first dimension of the result, so we can iterate that way. (see the ASSERT above, these are the same numbers)
     const int64_t nr0 = ne0;
 

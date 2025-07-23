@@ -2,6 +2,7 @@ ifndef LLAMA_MAKEFILE
 $(error The Makefile build is deprecated. Use the CMake build instead. For more details, see https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md)
 endif
 
+# DELETED AND COMENTED DOWN THE LLAMA-SERVER AFTER LLAMA-SAFE-LOAD-STATE
 # Define the default target now so that it is always the first target
 BUILD_TARGETS = \
 	libllava.a \
@@ -36,7 +37,6 @@ BUILD_TARGETS = \
 	llama-quantize-stats \
 	llama-retrieval \
 	llama-save-load-state \
-	llama-server \
 	llama-simple \
 	llama-simple-chat \
 	llama-run \
@@ -525,8 +525,8 @@ ifneq ($(filter loongarch64%,$(UNAME_M)),)
 endif
 
 ifneq ($(filter riscv64%,$(UNAME_M)),)
-	MK_CFLAGS   += -march=rv64gcv -mabi=lp64d
-	MK_CXXFLAGS += -march=rv64gcv -mabi=lp64d
+#	MK_CFLAGS   += -march=rv64gcv -mabi=lp64d
+#	MK_CXXFLAGS += -march=rv64gcv -mabi=lp64d
 endif
 
 else # RISC-V CROSS COMPILATION
@@ -952,6 +952,7 @@ DIR_GGML = ggml
 DIR_LLAMA = src
 DIR_COMMON = common
 
+#also added stuff in the end
 OBJ_GGML = \
 	$(DIR_GGML)/src/ggml.o \
 	$(DIR_GGML)/src/ggml-alloc.o \
@@ -966,15 +967,29 @@ OBJ_GGML = \
 	$(DIR_GGML)/src/ggml-cpu/ggml-cpu-hbm.o \
 	$(DIR_GGML)/src/ggml-cpu/ggml-cpu-quants.o \
 	$(DIR_GGML)/src/ggml-cpu/ggml-cpu-traits.o \
+	$(DIR_GGML)/src/gguf.o \
 	$(OBJ_GGML_EXT)
 
+#Added many, at the end, adter unicode-data.o
 OBJ_LLAMA = \
 	$(DIR_LLAMA)/llama.o \
 	$(DIR_LLAMA)/llama-vocab.o \
 	$(DIR_LLAMA)/llama-grammar.o \
 	$(DIR_LLAMA)/llama-sampling.o \
 	$(DIR_LLAMA)/unicode.o \
-	$(DIR_LLAMA)/unicode-data.o
+	$(DIR_LLAMA)/unicode-data.o \
+        $(DIR_LLAMA)/llama-adapter.o \
+        $(DIR_LLAMA)/llama-arch.o \
+        $(DIR_LLAMA)/llama-batch.o \
+        $(DIR_LLAMA)/llama-chat.o \
+        $(DIR_LLAMA)/llama-context.o \
+        $(DIR_LLAMA)/llama-hparams.o \
+        $(DIR_LLAMA)/llama-impl.o \
+        $(DIR_LLAMA)/llama-kv-cache.o \
+        $(DIR_LLAMA)/llama-mmap.o \
+        $(DIR_LLAMA)/llama-model-loader.o \
+        $(DIR_LLAMA)/llama-model.o \
+        $(DIR_LLAMA)/llama-quant.o 
 
 OBJ_COMMON = \
 	$(DIR_COMMON)/common.o \
@@ -1357,7 +1372,7 @@ rpc-server: examples/rpc/rpc-server.cpp \
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 endif # GGML_RPC
 
-llama-server: \
+lama-server: \
 	examples/server/server.cpp \
 	examples/server/utils.hpp \
 	examples/server/httplib.h \
