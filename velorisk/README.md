@@ -12,7 +12,13 @@ New library tailored for Tall And Skinny Matrixes for RISC-V architectures with 
 The different compiling and running recipies for different configurations (the other .sh were used for individual testing so I can't asure they work, they ones testes and used at the end are these ones):
 
 - Diffenent compiler used: ***tests/llama/run_inference_multicomp.sh***
-- CLANG 19 compiler but different NUMA strategies: ***tests/llama/run_inference_multi_numa_2.sh***
+- CLANG 19 compiler but different NUMA strategies: ***tests/llama/run_inference_multi_numa_2.sh*** *
+ 
+ **\*In order to see the actual effects of changeing the numa configuration, the caches must me droped first so you will see this lines in the code**
+```console
+sync
+echo 3 > /proc/sys/vm/drop_caches
+```
 
 ### GGML Kernel insertion
 Our customized kernel for GEMV Q4_0 is inserted in ***ggml-cpu.c*** . We intecept the normal flow of execution of llama.cpp when it doesn't have a specific backend, and we apply our kernel and return (probably not the best implementation but it works). 
@@ -45,7 +51,7 @@ In order to have a fine grain perfomance timings of each layer and operations it
 
 
 ----
-## Old Make recipie and Notes (PROBABLY DEPRECIADED)
+## Old Make recipe and Old Notes (depreciated, don't really read)
 make CC=/scratch/tools/compilers/xuantie_gcc/bin/riscv64-unknown-linux-gnu-gcc CXX=/scratch/tools/compilers/xuantie_gcc/bin/riscv64-unknown-linux-gnu-g++ CFLAGS="-mcpu=c920 -I/scratch/tools/compilers/xuantie_gcc/lib/gcc/riscv64-unknown-linux-gnu/10.4.0/include -I/scratch/tools/compilers/xuantie_gcc/lib/gcc/riscv64-unknown-linux-gnu/10.4.0/include-fixed -I/scratch/tools/frameworks/llama.cpp/velorisk/include" CXXFLAGS="-mcpu=c920 -I/scratch/tools/compilers/xuantie_gcc/lib/gcc/riscv64-unknown-linux-gnu/10.4.0/include -I/scratch/tools/compilers/xuantie_gcc/lib/gcc/riscv64-unknown-linux-gnu/10.4.0/include-fixed -I/scratch/tools/frameworks/llama.cpp/velorisk/include" LDFLAGS="-lvelorisk -L/scratch/tools/compilers/xuantie_gcc/lib -L/scratch/tools/compilers/xuantie_gcc/lib64 -L/scratch/tools/frameworks/llama.cpp/velorisk/lib" -j 32 LLAMA_OPENMP=OFF LLAMA_OPENBLAS=1 LLAMA_NO_OPENMP=1 PKG_CONFIG_PATH="/scratch/jpoveda/OpenBLAS_910V_Default_V0326_Cross/lib/pkgconfig/" 
 
 LLAMA_OPENBLAS is optional
